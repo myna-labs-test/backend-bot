@@ -1,13 +1,13 @@
-from .common import post_request
 from aiohttp import ClientSession
 from bot.configs.get_settings import get_backend_settings
 from bot.models.message import MessageNew
+from bot.utils.formatter import format_dict_safe
 
 
 async def add_message(message: MessageNew):
     settings = get_backend_settings()
-    url = f"http://{settings.BACKEND_CLIENT_HOSTNAME}:{settings.BACKEND_CLIENT_PORT}/user/register"
+    url = f"http://{settings.BACKEND_CLIENT_HOSTNAME}:{settings.BACKEND_CLIENT_PORT}/user/message"
     async with ClientSession() as session:
-        async with session.post(url, params=dict(message)) as response:
+        async with session.post(url, params=format_dict_safe(message)) as response:
             return
 

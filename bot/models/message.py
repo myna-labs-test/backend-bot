@@ -1,14 +1,15 @@
 from pydantic import BaseModel
 from enum import Enum
-
-
-class SenderType(str, Enum):
-    USER: str = 'USER'
-    CHARACTER: str = 'CHARACTER'
+from uuid import UUID
 
 
 class MessageNew(BaseModel):
-    sender_type: SenderType
+    sender_type: str
     message: str
-    character_id: str
+    character_id: UUID
     tg_id: int
+
+
+class MessageShort(BaseModel):
+    text: str
+    character_id: UUID

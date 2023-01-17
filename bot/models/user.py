@@ -1,11 +1,11 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 
 class UserFull(BaseModel):
-    first_name: str
-    last_name: str
-    username: str
-    tg_id: int
+    first_name: str = Field(None)
+    last_name: str = Field(None)
+    username: str = Field(None)
+    tg_id: int = Field(None)
 
 
 class UserShort(BaseModel):

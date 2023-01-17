@@ -5,10 +5,6 @@ from aiogram import Dispatcher, types, Router
 from aiogram.fsm.context import FSMContext
 from aiogram.filters.state import State, StatesGroup
 
-from bot.requests import group as group_requests, homeworks as homeworks_requests
-from bot.utils.formatter import format_date, format_records_enumerated
-from bot.models.homework import Homework
-from bot.models.chats import ChatsShortLink
 from bot.utils.loader import bot
 
 T = TypeVar("T", bound=BaseModel)

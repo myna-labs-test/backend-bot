@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 from uuid import UUID
 
 
@@ -17,7 +17,7 @@ class CharacterChange(BaseModel):
 
 
 class CharacterShort(BaseModel):
-    character_id: UUID
+    character_id: UUID = Field(None)
 
 
 class CharacterTextResponse(BaseModel):
