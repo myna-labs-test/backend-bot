@@ -1,11 +1,10 @@
-FROM python:3.10-slim
-
+FROM python:3.10-alpine
 WORKDIR /code
-
-COPY requirements.txt .
-
-RUN pip install -r requirements.txt
-
-COPY . .
-
-CMD [ "python", "-m", "bot" ]
+RUN apk add --no-cache make
+RUN apk add --no-cache poetry
+COPY poetry.lock pyproject.toml ./
+RUN poetry install || true
+COPY ./bot ./bot
+COPY ./.env ./.env
+COPY ./Makefile ./Makefile
+CMD make run
