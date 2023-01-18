@@ -20,5 +20,13 @@ class CharacterShort(BaseModel):
     character_id: UUID = Field(None)
 
 
+class CharacterText(BaseModel):
+    text: str
+    character_id: str
+    text_driver: str
+    tts_driver: str
+    model_id: str
+
+
 class CharacterTextResponse(BaseModel):
     text: str

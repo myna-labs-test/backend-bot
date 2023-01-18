@@ -1,9 +1,10 @@
 from aiogram import Dispatcher, types, Router
 from bot.models.user import UserShort
 from bot.requests.character import get_active_character
+from bot.models.character import CharacterShort
 from bot.models.message import MessageNew, MessageShort
 from bot.requests.message import add_message
-from bot.requests.character import get_character_text_response
+from bot.requests.character import get_character_text_response, get_character_model
 from aiogram.fsm.context import FSMContext
 
 message_router = Router()
@@ -29,5 +30,6 @@ async def message_handler(msg: types.Message) -> None:
         text=msg.text,
         character_id=active_character.character_id,
     )
-    response = await get_character_text_response(message)
+    character = await get_character_model(CharacterShort(character_id=active_character.character_id), msg.text)
+    response = await get_character_text_response(character)
     await msg.reply(response.text)
