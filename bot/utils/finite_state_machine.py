@@ -11,7 +11,7 @@ T = TypeVar("T", bound=BaseModel)
 
 
 async def print_canceled(msg: types.Message, state: Optional[FSMContext] = None) -> None:
-    await bot.send_message(msg.chat.id, "Список пуст\nОтменено", parse_mode="HTML")
+    await bot.send_message(msg.chat.id, "Отменено", parse_mode="HTML")
     if state:
         await state.clear()
 

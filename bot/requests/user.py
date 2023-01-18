@@ -1,14 +1,10 @@
-from aiohttp import ClientSession
-from bot.configs.get_settings import get_backend_settings
 from bot.models.user import UserFull
 from bot.utils.formatter import format_dict_safe
 from bot.exceptions.common import CommonException
+from bot.requests.base import APIClient
 
 
 async def add_user(user: UserFull) -> None:
-    settings = get_backend_settings()
-    url = f"http://{settings.BACKEND_CLIENT_HOSTNAME}:{settings.BACKEND_CLIENT_PORT}/user/register"
-    async with ClientSession() as session:
-        async with session.post(url, params=format_dict_safe(user)) as response:
-            if not response.status == 200:
-                raise CommonException((await response.json())['message'], None)
+    status, data = await APIClient.post('/user/register', params=format_dict_safe(user))
+    if not status == 200:
+        raise CommonException(data['message'], None)
