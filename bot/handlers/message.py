@@ -16,6 +16,7 @@ async def message_handler(msg: types.Message) -> None:
     )
     active_character = await get_active_character(user)
     if not active_character.character_id:
+        await msg.reply('Character is not chosen. Choose it using <code>/choose</code> command.')
         return
     message = MessageNew(
         sender_type='USER',

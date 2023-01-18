@@ -30,10 +30,4 @@ async def print_models(
     await bot.send_message(msg.chat.id, result, parse_mode="HTML")
 
 
-async def prepare_chat_id(msg: types.Message, state: FSMContext) -> None:
-    chats = await group_requests.get_chats_of_user(msg.from_user.id)
-    chats = format_records_enumerated(chats, ChatsShortLink)
-    await print_models(msg,state,chats,'Вы состоите в следующих чатах:')
-    await bot.send_message(msg.chat.id, 'Выберете id чата:')
-
 

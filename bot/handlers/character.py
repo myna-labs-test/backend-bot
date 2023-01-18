@@ -7,7 +7,7 @@ from aiogram.filters.command import Command
 
 from bot.requests.character import get_characters, change_active_character
 from bot.models.character import CharacterChange
-from bot.utils.finite_state_machine import prepare_chat_id, print_canceled, print_models
+from bot.utils.finite_state_machine import  print_canceled, print_models
 from bot.utils.loader import bot
 
 character_router = Router()
@@ -23,6 +23,7 @@ async def character_choose_start(msg: types.Message, state: FSMContext):
     characters = await get_characters()
     await state.update_data(character_id=characters)
     await print_models(msg, state, characters, 'Available characters:')
+    await bot.send_message(msg.chat.id, 'Choose id:')
 
 
 @character_router.message(CharacterState.character_id)
